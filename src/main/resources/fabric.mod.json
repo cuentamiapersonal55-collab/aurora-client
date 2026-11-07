@@ -1,0 +1,16 @@
+{
+  "schemaVersion": 1,
+  "id": "auroraclient",
+  "version": "${version}",
+  "name": "Aurora Client",
+  "description": "Cliente visual: auroras, efectos de golpe/kill, cosmeticos, emotes y HUD. Menu con Shift derecho.",
+  "authors": ["You"],
+  "environment": "client",
+  "entrypoints": { "client": ["com.aurora.client.AuroraClient"] },
+  "depends": {
+    "fabricloader": ">=0.16.0",
+    "minecraft": "~1.21.11",
+    "java": ">=21",
+    "fabric-api": "*"
+  }
+}
