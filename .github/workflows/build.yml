@@ -25,7 +25,8 @@ jobs:
           YARN=$(curl -s "https://meta.fabricmc.net/v2/versions/yarn/$MC" | python3 -c "import sys,json;print(json.load(sys.stdin)[0]['version'])")
           LOADER=$(curl -s https://meta.fabricmc.net/v2/versions/loader | python3 -c "import sys,json;print([x for x in json.load(sys.stdin) if x['stable']][0]['version'])")
           API=$(curl -s https://maven.fabricmc.net/net/fabricmc/fabric-api/fabric-api/maven-metadata.xml | grep -o "<version>[^<]*+$MC</version>" | tail -1 | sed 's/<[^>]*>//g')
-          LOOM=$(curl -s https://maven.fabricmc.net/net/fabricmc/fabric-loom/maven-metadata.xml | grep -o '<release>[^<]*' | sed 's/<release>//')
+          LOOM=$(curl -s https://maven.fabricmc.net/net/fabricmc/fabric-loom/maven-metadata.xml | grep -o '<version>1\.14[^<]*' | sed 's/<version>//' | grep -v SNAPSHOT | tail -1)
+          LOOM=${LOOM:-1.14-SNAPSHOT}
           echo "yarn=$YARN loader=$LOADER api=$API loom=$LOOM"
           sed -i "s|^yarn_mappings=.*|yarn_mappings=$YARN|" gradle.properties
           sed -i "s|^loader_version=.*|loader_version=$LOADER|" gradle.properties
